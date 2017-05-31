@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
+    {% block head %}
+        <title>Login</title>
+    {% endblock %}
 </head>
+
 <body>
-    Welcome to the login page!
+    {% block body %}
+        <div class="container">
+            <h1>Welcome</h1>
+            Welcome to the login page!
+            <button class="btn btn-default" type="button" name="button">Account Button</button>
+            <div class="jumbotron">
+                <h1>Hello {{ name }}</h1>
+                {% for number in numbers %}
+                    <li>{{ number }}</li>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
 </body>
 </html>

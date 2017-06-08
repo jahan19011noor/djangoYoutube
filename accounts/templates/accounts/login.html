@@ -4,19 +4,15 @@
         <title>Login</title>
     {% endblock %}
 
-
-
     {% block body %}
         <div class="container">
             <h1>Welcome</h1>
-            Welcome to the login page!
-            <button class="btn btn-default" type="button" name="button">Account Button</button>
-            <div class="jumbotron">
-                <h1>Hello {{ name }}</h1>
-                {% for number in numbers %}
-                    <li>{{ number }}</li>
-                {% endfor %}
-            </div>
+            <p>You can login here</p>
+            <h2>Login</h2>
+            <form method="post"><!--Imports the form from the built in login form that we imported on the urls.py-->
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
         </div>
     {% endblock %}
-

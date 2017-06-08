@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),   #refers to the db.sqlite3 file#
     }
 }
 
@@ -119,3 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#changes the default/built in login redirect url of '/accounts/profile/'#
+    #to '/account/home/'#
+#the name LOGIN_REDIRECT_URL specifies django to identify the target default url#
+
+LOGIN_REDIRECT_URL = '/account/home/'

@@ -125,4 +125,4 @@ STATIC_URL = '/static/'
     #to '/account/home/'#
 #the name LOGIN_REDIRECT_URL specifies django to identify the target default url#
 
-LOGIN_REDIRECT_URL = '/account/home/'
+LOGIN_REDIRECT_URL = '/account/'

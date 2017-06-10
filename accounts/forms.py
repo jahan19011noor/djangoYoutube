@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -31,3 +31,26 @@ class RegistrationForm(UserCreationForm):
             user.save()
 
         return user
+
+class EditProfileForm(UserChangeForm):
+
+    class Meta:
+        model = User
+
+        # We only need to exclude some of the code of the default UserChangeForm #
+        # There are 2-ways to do this #
+
+            # Using *fields #
+
+
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password'
+        )
+
+            # Using *exclude #
+
+                # exclude = (fields that we want to exclude)

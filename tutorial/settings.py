@@ -126,3 +126,6 @@ STATIC_URL = '/static/'
 #the name LOGIN_REDIRECT_URL specifies django to identify the target default url#
 
 LOGIN_REDIRECT_URL = '/account/'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025

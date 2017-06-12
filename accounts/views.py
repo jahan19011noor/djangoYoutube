@@ -10,6 +10,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 # Used to update session after password change and ensure auto-login with new password #
 from django.contrib.auth import update_session_auth_hash
 
+# To lock pages from unauthenticated users #
+from django.contrib.auth.decorators import login_required
+
 
 def login(request):
     numbers = [1,2,3,4,5]
@@ -19,6 +22,7 @@ def login(request):
 
     return render(request, 'accounts/login.html', args)
 
+@login_required
 def home(request):
     return render(request, 'accounts/home.html')
 
@@ -37,11 +41,12 @@ def register(request):
         return render(request, 'accounts/reg_form.html', args)
 
 
+@login_required
 def view_profile(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
-
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
@@ -55,7 +60,7 @@ def edit_profile(request):
 
         return render(request, 'accounts/edit_profile.html', args)
 
-
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)

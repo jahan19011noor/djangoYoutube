@@ -9,6 +9,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 # Used to update session after password change and ensure auto-login with new password #
 from django.contrib.auth import update_session_auth_hash
+from django.urls import reverse
 
 # To lock pages from unauthenticated users #
 from django.contrib.auth.decorators import login_required
@@ -32,7 +33,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/account')
+            return redirect(reverse('home').lstrip('/'))
     else:
         form = RegistrationForm()
 
@@ -53,7 +54,7 @@ def edit_profile(request):
 
         if form.is_valid():
             form.save()
-            return redirect('/account/profile')
+            return redirect(reverse('view_profile').lstrip('/'))
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
@@ -70,9 +71,9 @@ def change_password(request):
             # Update the session #
                 # User form.user = user who submitted the form, not the one who has been logged out on pass change #
             update_session_auth_hash(request, form.user)
-            return redirect('/account/profile')
+            return redirect(reverse('view_profile').lstrip('/'))
         else:
-            return redirect('/account/change-password')
+            return redirect(reverse('change_password').lstrip('/'))
 
     else:
         form = PasswordChangeForm(user=request.user)

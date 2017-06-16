@@ -9,7 +9,10 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=100, default='')
     website = models.URLField(default='')
     phone = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='profile_image', blank=True)    #upload_to="profile_image" is the folder storing the image#
 
+    def __str__(self):
+        return self.user.username
 
 #the kwargs contains a dic of key:value pairs#
 #if the 'created' key is available#

@@ -122,6 +122,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+# for image
+MEDIA_URL = '/media/'
+
+#        by default the image gets uploaded in the folder called profile_image which we have specified in the model
+#        have to define where is the image should be stored in the settings.py file to change the upload location
+#        then reupload the image: gets the profile_image folder created in the location that we have specified
+
+# The BASE_DIR is the project root folder
+# creates a media folder inside the tutorial folder and
+# uploads all the uploaded files during development into that folder
+MEDIA_ROOT = os.path.join(BASE_DIR, 'tutorial/media')
+
+
 #changes the default/built in login redirect url of '/accounts/profile/'#
     #to '/account/home/'#
 #the name LOGIN_REDIRECT_URL specifies django to identify the target default url#

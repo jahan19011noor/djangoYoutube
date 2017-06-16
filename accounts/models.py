@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save      #Will save the default django user object and run some code based on the post_save signal#
 
 # Create your models here.
+class UserProfileManager(models.Manager):
+    def get_queryset(self):
+        return super(UserProfileManager, self).get_queryset().filter(city='Dhaka')
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     description = models.CharField(max_length=100, default='')
@@ -10,6 +14,8 @@ class UserProfile(models.Model):
     website = models.URLField(default='')
     phone = models.IntegerField(default=0)
     image = models.ImageField(upload_to='profile_image', blank=True)    #upload_to="profile_image" is the folder storing the image#
+
+    dhaka = UserProfileManager()
 
     def __str__(self):
         return self.user.username

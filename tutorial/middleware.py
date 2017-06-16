@@ -24,8 +24,11 @@ class LoginRequiredMiddleware:
         path = request.path_info.lstrip('/')
 
         # if path == 'account/logout/':
-        print(reverse('logout'))
-        if path == reverse('logout').lstrip('/'):
+        print(reverse('accounts:logout'))
+        # if path == reverse('logout').lstrip('/'):
+
+        # need to change to accounts:logout after the namespace at urls.py#
+        if path == reverse('accounts:logout').lstrip('/'):
             logout(request)
 
         url_is_exempt = any(url.match(path) for url in EXEMPT_URLS)

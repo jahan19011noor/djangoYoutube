@@ -24,8 +24,8 @@ def login(request):
     return render(request, 'accounts/login.html', args)
 
 # @login_required
-def home(request):
-    return render(request, 'accounts/home.html')
+# def home(request):
+#     return render(request, 'accounts/home_old.html')
 
 
 def register(request):

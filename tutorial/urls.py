@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', tutorial_views.login_redirect, name='login_redirect'),
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('accounts.urls', namespace='accounts')),  #refers to the accounts app#
+    url(r'^home/', include('home.urls', namespace='home')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

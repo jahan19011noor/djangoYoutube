@@ -7,21 +7,27 @@
     {% block body %}
 
         <h1>Profile</h1>
-        <p>{{ user.username }}</p>
-        <p>{{ user.first_name }}</p>
-        <p>{{ user.last_name }}</p>
-        <p>{{ user.email }}</p>
+        <p>Username: {{ user.username }}</p>
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Last Name: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
         <p>Description: {{ user.userprofile.description }}</p>
         <p>Phone: {{ user.userprofile.phone }}</p>
         <p>City: {{ user.userprofile.city }}</p>
         <p>Website: {{ user.userprofile.website }}</p>
-
 
 {#        by default the image gets uploaded in the folder called profile_image which we have specified in the model      #}
 {#        have to define where is the image should be stored in the settings.py file to change the upload location     #}
 {#        then reupload the image: gets the profile_image folder created in the location that we have specified     #}
 {#        user.userprofile.image gives the reference provided in the database      #}
 {#        the .url referes to where the image is actually stored      #}
-        <p><img src="{{ user.userprofile.image.url }}" alt="" width="200"></p>
+{#        <p><img src="{{ user.userprofile.image.url }}" alt="" width="200"></p>        #}
+
+
+{#        To make profile image optional        #}
+        {% if user.userprofile.image %}
+            <p><img src="{{ user.userprofile.image.url }}" alt="" width="200"></p>
+        {% endif %}
+{#        To make profile image optional        #}
 
     {% endblock %}

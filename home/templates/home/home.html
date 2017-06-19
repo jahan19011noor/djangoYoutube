@@ -10,8 +10,9 @@
         {% endblock %}
 
         {% block body %}
+            <div class="col-md-8">
 
-            <h1>Home</h1>
+                <h2>Home</h2>
 
 {###########  django widgets allow to write python code or html forms  ############}
     {#<form method="POST">#}
@@ -19,21 +20,56 @@
         {#<button class="btn btn-primary" type="submit">Submit</button>#}
     {#</form>#}
 
-            <form method="POST">
-                {% csrf_token %}
-{#                {{ form.as_p }} //renders along with the help text Post    #}
-{#                renders the input field only          #}
-                {{ form.post }}
-                {{ form.errors }}
-                <br>
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
+                <form method="POST">
+                    {% csrf_token %}
+    {#                {{ form.as_p }} //renders along with the help text Post    #}
+    {#                renders the input field only          #}
+                    {{ form.post }}
+                    {{ form.errors }}
+                    <br>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
 
-{#            <h2>{{ text }}</h2>#}
+{#              <h2>{{ text }}</h2>#}
 
-            {% for post in posts %}
-                <h1>{{ post.post }}</h1>
-                <p>Posted by: {{ user.get_full_name }} on the date: {{ post.created }}</p>
-            {% endfor %}
+                {% for post in posts %}
+                    <h1>{{ post.post }}</h1>
+                    <p>Posted by: {{ user.get_full_name }} on the date: {{ post.created }}</p>
+                {% endfor %}
+            </div>
+            <div class="col-xs-4">
+                <h2>Other People</h2>
+
+                {% for user in users %}
+                <div class="row" style="margin-bottom:20px">
+                    <div class="col-xs-6">
+                        <a href="{% url 'accounts:view_profile_pk' pk=user.pk %}">
+                            <h3 style="margin:0px !important;">{{ user.username }}</h3>
+                        </a>
+                    </div>
+                    <div class="col-xs-6">
+                        {% if user not in friends %}
+                        <a href="{% url 'home:change_friends' operation='add' pk=user.pk %}" type="button" class="btn btn-success">Make Friend</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+
+
+                <h2>Friends</h2>
+                {% for friend in friends %}
+                <div class="row" style="margin-bottom:20px">
+                    <div class="col-xs-6">
+                        <a href="{% url 'accounts:view_profile_pk' pk=friend.pk %}">
+                            <h3 style="margin:0px !important;">{{ friend.username }}</h3>
+                        </a>
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}" type="button" class="btn btn-danger">Remove Friend</a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
 
         {% endblock %}

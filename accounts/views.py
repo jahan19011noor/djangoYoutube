@@ -3,7 +3,7 @@ from accounts.forms import (
     RegistrationForm,
     EditProfileForm
 )
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 
@@ -43,8 +43,12 @@ def register(request):
 
 
 # @login_required
-def view_profile(request):
-    args = {'user': request.user}
+def view_profile(request, pk=None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
+    args = {'user': user}
     return render(request, 'accounts/profile.html', args)
 
 # @login_required

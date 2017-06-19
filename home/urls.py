@@ -11,5 +11,6 @@ urlpatterns = [
     # as_view() has be be passed because
         # url() function takes a function to get the template from
         # and as_view() returns that function
-    url(r'^$', views.HomeView.as_view(), name='home')
+    url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.change_friends, name='change_friends')
 ]
